@@ -27,6 +27,15 @@ Genesis 1.4.4で、下位歩行PPO（Phase112）と上位12D PPO（Phase50）を
 
 この結果は**1つの初期配置・1つの長時間実行**であり、あらゆる条件での安定性や12D姿勢入力の有効性を証明するものではありません。
 
+## 実行環境
+
+- **実行基盤：** Google Colab（NVIDIA L4 GPU）
+- **シミュレータ：** Genesis 1.4.4
+- **強化学習：** PyTorch / RSL-RL 5.5.1
+- **映像描画：** PyBullet（Genesisの記録データを描画）
+
+最終評価の60秒完走・8回の役割交代はL4環境で確認しました。T4環境では同条件の実行が途中停止しており、GPU差が原因と断定するものではありません。
+
 ## 再現・ファイル
 
 - [`notebooks/56_genesis_60s_3d_dot_video.ipynb`](notebooks/56_genesis_60s_3d_dot_video.ipynb) — Genesisで60秒評価した開発版Notebook（公開用整理版は登録準備中）
