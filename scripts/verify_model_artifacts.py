@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Local validation for the four artifacts used in the final Genesis evaluation.
-Run in a trusted environment: torch.load/pickle can execute arbitrary code.
+"""Check the four published artifacts used by the final Genesis evaluation.
+
+Only run this against trusted files: torch.load/pickle.load may execute code.
 """
 import argparse
 import hashlib
@@ -10,31 +11,36 @@ from pathlib import Path
 import torch
 
 FILES = {
-    "locomotion": "training/locomotion/phase112_78e8a86701/phase112_final.pt",
-    "cfg": "training/locomotion/phase112_78e8a86701/planned_cfgs.pkl",
-    "pursuit": "training/upper12_genesis/phase50_42b70a6b/upper_pursuit_12d_phase50.pt",
-    "evasion": "training/upper12_genesis/phase50_42b70a6b/upper_evasion_12d_phase50.pt",
+    "locomotion": "phase112_final.pt",
+    "cfg": "planned_cfgs.pkl",
+    "pursuit": "upper_pursuit_12d_phase50.pt",
+    "evasion": "upper_evasion_12d_phase50.pt",
 }
 
-def digest(path):
+
+def sha256(path):
     h = hashlib.sha256()
-    with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             h.update(chunk)
     return h.hexdigest()
 
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("drive_root", type=Path, help="PhysicalAI_Go2_Pursuit directory")
+    parser.add_argument(
+        "models_dir", nargs="?", type=Path, default=Path("models"),
+        help="Directory with four published model/config files (default: models)"
+    )
     args = parser.parse_args()
-    for role, relative in FILES.items():
-        path = args.drive_root / relative
+    for role, filename in FILES.items():
+        path = args.models_dir / filename
         if not path.is_file():
             raise FileNotFoundError(path)
-        print(f"{role}: {path.name} bytes={path.stat().st_size} sha256={digest(path)}")
+        print(f"{role}: {filename} bytes={path.stat().st_size} sha256={sha256(path)}")
         if role == "cfg":
-            with path.open("rb") as f:
-                obj = pickle.load(f)
+            with path.open("rb") as stream:
+                obj = pickle.load(stream)
             assert isinstance(obj, (tuple, list)) and len(obj) == 5
             assert len(obj[0]["joint_names"]) == 12
             print("  locomotion config: 12 joints / 5 sections OK")
@@ -47,7 +53,8 @@ def main():
                 print("  upper policy: actor_critic / input_dim=12 OK")
             else:
                 print("  locomotion checkpoint: dict OK")
-    print("PASS: local file format and structural checks")
+    print("PASS: artifact format and structural checks (not a physics simulation)")
+
 
 if __name__ == "__main__":
     main()
