@@ -44,11 +44,11 @@ Genesis 1.4.4で、下位歩行PPO（Phase112）と上位12D PPO（Phase50）を
 - [`docs/model_manifest.md`](docs/model_manifest.md) — 必要な学習済みモデルと設定
 - [`docs/experiment_summary.md`](docs/experiment_summary.md) — 結果と評価上の制約
 
-**注意：** [`models/`](models/) に上位追跡・回避PPOと歩行設定を公開しました。下位歩行PPO `phase112_final.pt` は未登録です。評価Notebookは現在Google Drive上の配置を参照するため、実行時にパス調整も必要です。詳細は [`docs/model_manifest.md`](docs/model_manifest.md) を参照してください。
+**注意：** [`models/`](models/) に上位追跡・回避PPOと歩行設定を公開しました。下位歩行PPOを含む4ファイルすべてを公開済みです。評価Notebookは現在Google Drive上の配置を参照するため、実行時にパス調整が必要です。詳細は [`docs/model_manifest.md`](docs/model_manifest.md) を参照してください。
 
 ## 公開範囲と再現性の制約
 
-本リポジトリは提出用の最終評価Notebook、技術資料、結果の検証スクリプトをまとめたものです。**上位追跡・回避PPOと設定ファイルは公開済みですが、下位歩行モデルが未登録のため、このリポジトリだけでは最終結果を再実行できません。** 第三者による完全再現は未実施です。
+本リポジトリは提出用の最終評価Notebook、技術資料、結果の検証スクリプトをまとめたものです。**下位歩行・上位追跡・上位回避のPPOモデルと設定ファイルは公開済みです。** ただし、Notebookのパス調整や環境構築が必要で、第三者による完全再現は未実施です。
 
 最終結果（60秒、役割交代8回）は特定の初期配置で得たものであり、異なる条件での安定性や12D姿勢観測の効果を保証しません。公開用に整理した評価Notebookは未登録であり、既存のPhase56 Notebookは開発過程を含む記録です。実験の再現性は今後の課題です。
 
