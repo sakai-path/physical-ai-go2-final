@@ -2,14 +2,14 @@
 
 | 用途 | ファイル | GitHubへのモデル本体登録 |
 |---|---|---|
-| 下位歩行PPO（Phase112） | `phase112_final.pt` | 未登録（転送制限により保留） |
+| 下位歩行PPO（Phase112） | `phase112_final.pt` | 公開済み |
 | 歩行環境設定 | `planned_cfgs.pkl` | 公開済み |
 | 上位追跡12D PPO（Phase50） | `upper_pursuit_12d_phase50.pt` | 公開済み |
 | 上位回避12D PPO（Phase50） | `upper_evasion_12d_phase50.pt` | 公開済み |
 
 Google Drive上の正確な配置は [`reproduction.md`](reproduction.md) に記載しています。
 
-Phase50の追跡・回避モデルおよび歩行設定は [`models/`](../models/) に公開しました。下位歩行モデルは現在未登録のため、このリポジトリだけでは最終評価を再実行できません。
+Phase50の追跡・回避モデルおよび歩行設定は [`models/`](../models/) に公開しました。下位歩行モデルも含め4ファイルを公開済みです。評価Notebookのパス調整・環境構築は必要です。
 
 既存の古い追跡・回避8Dモデルのハッシュ値を、Phase50の12Dモデルのハッシュ値として流用しません。公開したモデルのSHA-256は、GitHubから取得したファイルを使って確認してください。
 
@@ -24,7 +24,7 @@ Google Driveのプロジェクトフォルダ内で、最終評価に使用す�
 | `upper_pursuit_12d_phase50.pt` | 153,426 bytes | Driveに存在・非共有 |
 | `upper_evasion_12d_phase50.pt` | 153,426 bytes | Driveに存在・非共有 |
 
-**公開状況：** 上位2モデルと設定ファイルをGitHubへ登録済み。下位歩行モデルは未登録です。第三者による再実行は未実施です。Driveの共有設定は変更していません。
+**公開状況：** 4ファイルすべてをGitHubへ登録済み。第三者による再実行は未実施です。Driveの共有設定は変更していません。
 
 ## ローカル検証
 
