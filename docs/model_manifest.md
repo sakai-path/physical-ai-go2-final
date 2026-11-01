@@ -7,7 +7,7 @@
 | 上位追跡12D PPO（Phase50） | `upper_pursuit_12d_phase50.pt` | 公開済み |
 | 上位回避12D PPO（Phase50） | `upper_evasion_12d_phase50.pt` | 公開済み |
 
-Google Drive上の正確な配置は [`reproduction.md`](reproduction.md) に記載しています。
+公開用のファイル配置と実行手順は [`reproduction.md`](reproduction.md) に記載しています。
 
 Phase50の追跡・回避モデルおよび歩行設定は [`models/`](../models/) に公開しました。下位歩行モデルも含め4ファイルを公開済みです。評価Notebookのパス調整・環境構築は必要です。
 
@@ -28,10 +28,10 @@ Google Driveのプロジェクトフォルダ内で、最終評価に使用す�
 
 ## ローカル検証
 
-Google ColabでGoogle Driveをマウントした後、信頼できる自分のチェックポイントに対して以下を実行します。
+公開リポジトリを取得し、信頼できるチェックポイントに対して実行します。
 
 ```bash
-python scripts/verify_model_artifacts.py /content/drive/MyDrive/PhysicalAI_Go2_Pursuit
+python scripts/verify_model_artifacts.py models
 ```
 
-このスクリプトはファイル存在・SHA-256・設定の12関節・上位モデルの12D入力などを確認します。**スクリプトの登録は完了しましたが、4ファイルに対する実行結果はまだ未取得です。** `torch.load` と `pickle.load` は信頼できるファイルに限って実行してください。
+このスクリプトはファイル存在・SHA-256・設定の12関節・上位モデルの12D入力などを確認します。**公開モデル4ファイルに対するスクリプト実行は未確認です。** `torch.load` と `pickle.load` は信頼できるファイルに限って実行してください。
